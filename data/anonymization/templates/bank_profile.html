@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Bank Profile {% endblock pagetitle %}
+{% block content %}
+{% load static %}
+{% include 'nav.html' %}
+
+{% if profiles.user_id != user.id %}
+
+<section class="container">
+        <br>
+    <div class="section-title">
+        <h2>Complete Profile</h2>
+    </div>
+
+    <form action="{% url 'store_bank_profile' %}" class="php-email-form" method="POST">
+        {% csrf_token %}
+        <div class="row">
+
+            <div class="col-md-6 form-group">
+                <label> Name </label>
+                <input class="form-control" name="name"
+                       placeholder="what's your name ?" type="text">
+            </div>
+
+            <div class="col-md-6 form-group mt-2 mt-md-0">
+                <label> mail Id</label>
+                <input class="form-control" name="mail_id"
+                       placeholder="write your mail address" type="email">
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 form-group mt-2">
+                <label> Mobile Number </label>
+                <input class="form-control" name="mobile_no"
+                       placeholder="Enter your contact number" type="number">
+            </div>
+
+            <div class="col-md-6 form-group mt-2">
+                <label> Address of Bank </label>
+                <input class="form-control" name="address"
+                       placeholder="Address of bank" type="text">
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 form-group mt-2">
+                <label> Name of Bank </label>
+                <select class="form-control bg-light" name="organization">
+                    <option value="empty">Select  Bank Names</option>
+                    {% for bank_name in bank_names %}
+                    <option value="{{ bank_name.name }}">{{bank_name.id}}-{{bank_name.name}}|{{bank_name.address}}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-2">
+            <button class="btn btn-primary me-2 " type="Submit">Submit</button>
+        </div>
+
+    </form>
+
+</section>
+{% else %}
+
+<section class="h-100 gradient-custom-2" style="background-color: #A8BAC8;">
+    <br>
+    <div class="section-title">
+        <h2>Your Profile</h2>
+    </div>
+
+    <div class="container ">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-lg-9 col-xl-7">
+                <div class="card">
+                    <div class="rounded-top text-white d-flex flex-row"
+                         style="background-color: #87BDD3; height:100px;">
+
+                        <div class="ms-3">
+                            <h3>Name- {{profiles.name}}</h3>
+                            <p>Organization - {{ profiles.organization }} | Address - {{ profiles.address }}</p>
+                        </div>
+                    </div>
+                    <div class="p-4 text-black" style="background-color: #f8f9fa;">
+
+
+                        <div class="mb-4 ">
+                            <div class="border p-4" style="background-color: #f8f9fa;">
+                                <p class="font-italic mb-1">Mobile Number - {{ profiles.mobile_no }}</p>
+                                <p class="font-italic mb-1">Mail Address - {{profiles.mail_id}}</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-contentz-between align-items-center mb-4">
+                            <p class="lead fw-normal mb-0"></p>
+                            <a class="btn btn-info float-end" href="{% url 'bank_home'%}"> Home</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endif %}
+{% endblock %}

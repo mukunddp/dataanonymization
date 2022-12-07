@@ -1,0 +1,42 @@
+                {% load static %}
+
+ <header class="fixed-top" id="header">
+            <div class="container d-flex align-items-center">
+
+                <img alt="logo" class="logo me-auto"
+                     height="55" onclick=""
+                     src="{% static 'img/b.png' %} ">
+
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+                {% if user.department == 'IT' %}
+
+                <nav class="navbar order-last order-lg-0" >
+                    <ul>
+                        <li><a class="nav-link scrollto " href="{% url 'it_home' %}">IT Dashboard </a></li>
+
+                        <li><a class="nav-link scrollto" href="{% url 'it_profile' user.id %}">Profile</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
+                                {% else %}
+
+                <nav class="navbar order-last order-lg-0">
+                    <ul>
+                        <li><a class="nav-link scrollto " href="{% url 'bank_home' %}">Bank Dashboard </a></li>
+
+                        <li><a class="nav-link scrollto" href="{% url 'bank_profile' user.id %}">Profile</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                <a class="appointment-btn scrollto" href="{% url 'logout' %}"><span
+                        class="d-none d-md-inline">Logout </span> </a>
+                {% else %}
+                <a class="appointment-btn scrollto" href="{% url 'login' %}"><span
+                        class="d-none d-md-inline">Login / </span> Sign Up</a>
+                {% endif %}
+            </div>
+        </header><!-- End Header -->

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Bank Home {% endblock pagetitle %}
+{% block content %}
+{% load static %}
+{% include 'nav.html' %}
+<section>
+    <div class="container p-2 my-2  ">
+        {% if user.is_authenticated %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-primary " role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    </div>
+    <div class="section-title">
+        <h2>Bank Users Details !</h2>
+        <a class="btn btn-info " href="{% url 'bank_profile' user.id %}"> View Profile </a>
+    </div>
+        <table class="table table-striped ">
+            <thead>
+            <tr>
+                <th scope="col" style="text-align: center;">Name of User</th>
+                <th scope="col" style="text-align: center;">Account Type</th>
+                <th scope="col" style="text-align: center;">Account Number</th>
+                <th scope="col" style="text-align: center;">See Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for b in bank_userlist %}
+            <tr>
+
+                <td style="text-align: center;"> {{ b.first_name }} {{ b.fathers_name }} {{ b.last_name }}</td>
+                <td style="text-align: center;"> {{ b.account_type }}</td>
+                <td style="text-align: center;"> {{ b.account_no }}</td>
+                <td style="text-align: center;"><a class="appointment-btn" href="{% url 'details_user' b.id %}"><span
+                        class="d-none d-md-inline"> Open  </span> </a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+    <p class="lead fw-normal mb-3 me-3">Please login into System to see details </p>
+    {% endif %}
+</section>
+{% endblock %}

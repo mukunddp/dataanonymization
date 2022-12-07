@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Login {% endblock pagetitle %}
+
+{% block content %}
+{% load static %}
+
+
+<br>
+
+<section class="p-4 " style="background-color: #e3f2fd;">
+    <div class="row justify-content-center ">
+        <div class="col-md-4 border p-3" style="background-color: white;">
+            <h3 class="text-center mt-3">Login Page</h3>
+            <hr>
+                <span class=" text-muted">
+                    {% if msg %}
+                        {{ msg | safe }}
+
+                    {% endif %}
+                </span>
+            <form method="post" >
+                {% csrf_token %}
+                <div class="form-group first  mt-4 ">
+                    <label class="mb-3">Username :</label>
+                    {{ form.username }}
+                </div>
+                <div class="form-group last mt-3 mb-4 ">
+                    <label class="mb-3">Password :</label>
+                    {{ form.password }}
+                </div>
+                <hr>
+                <div class=" text-center me-2 mt-3 ">
+                    <input class="appointment-btn scrollto text-white  btn-primary" type="submit" value="Log In">
+                    <br>
+                    <div class="text-center control  mt-3">
+                        Don't have account (
+                        <a href="{% url 'register' %}"> click here to register </a>)
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock%}

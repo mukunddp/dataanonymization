@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block pagetitle %} IT Home {% endblock pagetitle %}
+{% block content %}
+{% load static %}
+{% include 'nav.html' %}
+<section>
+    <div class="container p-3 my-4 border ">
+        {% if user.is_authenticated %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-primary " role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <div class="section-title">
+
+            <h2>Bank Managers Who shared Details With You !</h2>
+                    <a class="btn btn-info float-end" href="{% url 'it_profile' user.id %}"> View Profile </a>
+
+        </div>
+        <br>
+        <table class="table table-striped ">
+            <thead>
+            <tr>
+
+                <th scope="col" style="text-align: center;">Name</th>
+                <th scope="col" style="text-align: center;">Name of Bank</th>
+                <th scope="col" style="text-align: center;">Bank Address</th>
+                <th scope="col" style="text-align: center;">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for u in pro %}
+            <tr>
+
+                <td style="text-align: center;">{{ u.name }}</td>
+                <td style="text-align: center;">{{ u.organization }}</td>
+                <td style="text-align: center;">{{ u.address }}</td>
+                <td style="text-align: center;"><a class="appointment-btn" href="{% url 'shared_data' u.id %}"><span
+                        class="d-none d-md-inline"> Open  </span> </a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% else %}
+        <p class="lead fw-normal mb-3 me-3">Please login into System to see details </p>
+
+        <p>{{ msg }}</p>
+        {% endif %}
+
+    </div>
+
+    </div>
+</section>
+{% endblock %}

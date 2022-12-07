@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Details  {% endblock pagetitle %}
+{% block content %}
+{% load static %}
+{% include 'nav.html' %}
+
+
+<section>
+<div class="container p-2 my-2  ">
+    {% if user.is_authenticated %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-primary " role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+            <div class="section-title">
+
+            <h2> Bank User Name - {{ b.first_name }} {{ b.fathers_name }} {{ b.last_name }}</h2>
+
+        </div>
+<section class="container p-3  border">
+    <form action="{% url 'details_user' b.id %}" class="php-email-form mt-2" method="POST">
+        {% csrf_token %}
+        <div class="row mt-3 mb-4">
+                 <div class="col-md-6 form-group">
+                <label class="mb-2"> Name of IT company and IT manager </label>
+                <select class="form-control bg-light mt-1" name="it_man">
+                    <option value="empty"> Select</option>
+                    {% for it in profiles_it %}
+                    <option value="{{ it.id }}">{{it.id}} - {{it.organization}} | {{it.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <p>  ID - <input  type="number" name="bank_user_id" value="{{b.id}}" />   </p>
+                    <h6> Address-{{ b.address }}</h6>
+            </div>
+
+
+
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-2 form-group">
+                <div class="card mb-4">
+                    <label> First Name <input class="mt-2 float-end me-3" name="checks" type="checkbox" value="1"/>
+                    </label>
+                    <input class="mt-2 " name="first_name" value="{{ b.first_name }}"/>
+                </div>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <div class="card  mb-4">
+                    <label> Father's Name <input name="checks" type="checkbox" value="2"/> </label>
+                    <input class="mt-2 " name="fathers_name" value="{{ b.fathers_name }}"/>
+                </div>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <div class="card  mb-4">
+                    <label> Surname <input name="checks" type="checkbox" value="3"/> </label>
+                    <input class="mt-2 " name="last_name" value="{{ b.last_name }}"/>
+                </div>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <div class="card  mb-4">
+                    <label> Mobile Number <input name="checks" type="checkbox" value="4"/> </label>
+                    <input class="mt-2 " name="mobile_no" value="{{ b.mobile_no }}"/>
+
+                </div>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <div class="card  mb-4">
+                    <label> Age <input name="checks" type="checkbox" value="5"/> </label>
+                    <input class="mt-2" name="age" value="{{ b.age }}"/>
+                </div>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <div class="card  mb-4">
+                    <label> Date of Birth <input name="checks" type="checkbox" value="6"/></label>
+                    <input class="mt-2" name="dob" value="{{ b.dob }}"/>
+                </div>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <div class="card  mb-4">
+                    <label> Mail ID <input name="checks" type="checkbox" value="7"/></label>
+                    <input class="mt-2" name="mail_id" value="{{ b.mail_id }}"/>
+                </div>
+            </div>
+
+
+            <div class="col-md-2 form-group">
+                <div class="card  mb-4">
+                    <label> Account Number <input name="checks" type="checkbox" value="8"/> </label>
+                    <input class="mt-2 " name="account_no" value="{{ b.account_no }}"/>
+                </div>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <div class="card  mb-4">
+                    <label> Account Type <input name="checks" type="checkbox" value="9"/> </label>
+                    <input class="mt-2 " name="account_type" value="{{ b.account_type }}"/>
+                </div>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <div class="card  mb-4">
+                    <label> PAN Number <input name="checks" type="checkbox" value="10"/> </label>
+                    <input class="mt-2 " name="pan_no" value="{{ b.pan_no }}"/>
+                </div>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <div class="card  mb-4">
+                    <label> Aadhar Number <input name="checks" type="checkbox" value="11"/> </label>
+                    <input class="mt-2 " name="aadhar_no" value="{{ b.aadhar_no }}"/>
+                </div>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <div class="card  mb-4">
+                    <label> Occupation <input name="checks" type="checkbox" value="12"/> </label>
+                    <input class="mt-2 " name="occupation" value="{{ b.occupation }}"/>
+                </div>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <div class="card  ">
+                    <label> Address <input name="checks" type="checkbox" value="13"/> </label>
+                    <input class="mt-2 " name="address" value="{{ b.address }}"/>
+                </div>
+            </div>
+            <div class="col-md-2 form-group">
+                <div class="card  ">
+                    <label> Account Balance <input name="checks" type="checkbox" value="14"/> </label>
+                    <input class="mt-2 " name="balance" value="{{ b.balance }}"/>
+                </div>
+            </div>
+            <div class="col-md-4 form-group mt-3 mb-4">
+                <button class="float-end btn btn-primary me-2 " type="Submit">Submit</button>
+            </div>
+
+
+        </div>
+
+
+    </form>
+        <hr>
+</section>
+
+{% else %}
+<p class="lead fw-normal mb-3 me-3">Please login into System to see details </p>
+{% endif %}
+</section>
+    {% endblock %}

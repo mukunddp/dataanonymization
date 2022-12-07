@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Data Anonymization {% endblock pagetitle %}
+{% block content %}
+{% load static %}
+{% include 'nav.html' %}
+
+<section>
+    <div class="container p-2 my-2  ">
+        {% if user.is_authenticated %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-primary " role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div class="section-title">
+
+        <h2>Data Anonymization</h2>
+
+    </div>
+{{msg}}
+        {% for b in user_details %}
+    <section class="container p-4  border">
+
+        <div class="row   ">
+            <div class="col form-group">
+                <p> ID - {{b.id}}</p>
+                <h6 class="float-end"> Address - {{ b.address }} </h6>
+                <h4> Name of Bank User - {{ b.first_name }} {{ b.fathers_name }} {{ b.last_name }} </h4>
+            </div>
+        </div>
+
+        <div class=" p-2" style="background-color: #f8f9fa;">
+            <hr>
+            <h6>Personal Details </h6>
+            <hr>
+            <div class="row ">
+                <div class="col-md-4 form-group">
+                    <label> <span style="color:green"> <b>First Name :</b>  </span> </label>
+                    {{ b.first_name }}
+                </div>
+                <div class="col-md-4 form-group">
+                    <label> <span style="color:green"> <b>Father's Name : </b>  </span> </label>
+                    {{ b.fathers_name }}
+                </div>
+                <div class="col-md-4 form-group mt-md-1">
+                    <label> <span style="color:green"> <b>Last Name :</b>  </span> </label>
+                    {{ b.last_name }}
+
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-md-6 form-group mt-md-1">
+                    <label> <span style="color:green"> <b>Age : </b>  </span> </label>
+                    {{ b.age }}
+                </div>
+
+                <div class="col-md-6 form-group mt-md-1">
+                    <label> <span style="color:green"> <b>Date of Birth : </b>  </span> </label>
+                    {{ b.dob }}
+                </div>
+            </div>
+
+
+            <div class="row ">
+                <div class="col-md-6 form-group">
+                    <label> <span style="color:green"> <b>Mobile Number :</b>  </span> </label>
+                    {{ b.mobile_no }}
+                </div>
+
+                <div class="col-md-6 form-group mt-md-1">
+                    <label> <span style="color:green"> <b>Mail ID :</b>  </span> </label>
+                    {{ b.mail_id }}
+
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-6 form-group">
+                    <label> <span style="color:green"> <b>Occupation :</b>  </span> </label>
+                    {{ b.occupation }}
+                </div>
+
+                <div class="col-md-6 form-group mt-md-1">
+                    <label> <span style="color:green"> <b>Address :</b>  </span> </label>
+                    {{ b.address }}
+
+                </div>
+            </div>
+
+            <hr>
+            <h6>Account Information </h6>
+            <hr>
+
+
+            <div class="col">
+                <label> <span style="color:red"> <b> Account Number :</b>  </span> </label>
+                {{ b.account_no }}
+            </div>
+
+            <div class="col form-group mt-md-1">
+                <label> <span style="color:red"> <b>Account Type :</b>  </span> </label>
+                {{ b.account_type }}
+
+            </div>
+
+            <div class="col form-group">
+                <label> <span style="color:red"> <b>PAN Number :</b>  </span> </label>
+                {{ b.pan_no }}
+            </div>
+
+            <div class="col form-group mt-md-1">
+                <label> <span style="color:red"> <b>Aadhar Number :</b>  </span> </label>
+                {{ b.aadhar_no }}
+
+            </div>
+            <div class="col form-group mt-md-1">
+                <label> <span style="color:red"> <b>Account Balance :</b>  </span> </label>
+                {{ b.balance }}
+
+            </div>
+        </div>
+    </section>
+    <br>
+    {% endfor %}
+
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Sign Up {% endblock pagetitle %}
+
+{% block content %}
+{% load static %}
+
+
+    <section class="border p-3 row justify-content-center " style="background-color: #e3f2fd;">
+
+        <div class="col-md-6 " style="background-color: white;">
+            <h2 class="text-center mt-3"> Registration Page ! </h2>
+            <span class="text-muted">
+                        {% if msg %}
+                            {{ msg | safe }}
+                        {% endif %}
+                </span>
+            <form class=" p-2" method="post">
+                {% csrf_token %}
+                <hr>
+                <div class="row mt-3">
+                    <div class="col-md-6 form-group ">
+                        <label>Username : </label>
+                        <br>
+                        {{ form.username }}
+                    </div>
+
+                    <div class="col-md-6 form-group mt-md-1">
+                        <label>Email address :</label>
+                        <br>
+                        {{ form.email}}
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6 form-group">
+                        <label>Password :</label>
+                        <br>
+                        {{ form.password1 }}
+                    </div>
+
+                    <div class="col-md-6 form-group mt-md-1">
+                        <label> Confirm Password :</label>
+                        <br>
+                        {{ form.password2 }}
+                    </div>
+                </div>
+
+
+                <div class="row mt-3">
+                    <div class=" text-center form-group mt-2">
+                        <label>Select your profession</label>
+                    {{form.department}}
+
+                    </div>
+                </div>
+
+                <span class="text-error">{{ form.errors }}</span>
+
+                <hr>
+                <div class="text-center">
+                    <input class="appointment-btn scrollto text-white  btn-primary" type="submit" value="Register">
+
+                </div>
+
+                <div class="text-center mb-3 ">
+
+                    <div class="control  mt-2">Already have account (
+                        <a class="btn-link" href="{% url 'login_view' %}"> click here to login</a> )
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+
+
+{% endblock%}
+
+
+
+
+
+
+
