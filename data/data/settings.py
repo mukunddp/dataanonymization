@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#**e!u-szua%gl!%j*k4+=&#g_u+ha3gj3sq+zrb8%k7k#mkc#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 # Application definition
 
@@ -73,20 +73,20 @@ WSGI_APPLICATION = 'data.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
     # Use this db for Postgres sql
 
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'data',
-        'USER': 'postgres',
-        'PASSWORD': 'mukund',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'data',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'mukund',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '5432',
+    # }
 }
 
 # Password validation
@@ -124,10 +124,9 @@ USE_TZ = True
 AUTH_USER_MODEL = 'anonymization.User'
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
